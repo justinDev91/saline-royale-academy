@@ -7,6 +7,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
+
+
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -26,9 +29,11 @@ import static com.example.salineroyaleacademy.user.Role.ADMIN;
 @Data
 @Builder
 @NoArgsConstructor
-@AllArgsConstructor
+@AllArgsConstructor(staticName = "build")
 @Entity
-@Table(name = "_user")
+@Table(name = "_user", uniqueConstraints = {
+    @UniqueConstraint(columnNames = "email")
+})
 public class User implements UserDetails {
 
   @Id
@@ -38,7 +43,6 @@ public class User implements UserDetails {
   private String lastname;
   private String email;
   private String password;
-
   @Builder.Default()
   @Enumerated(EnumType.STRING)
   private Role role = ADMIN;

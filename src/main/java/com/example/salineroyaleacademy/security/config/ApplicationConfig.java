@@ -21,7 +21,8 @@ import com.example.salineroyaleacademy.user.UserRepository;
 @RequiredArgsConstructor
 public class ApplicationConfig {
 
-  private final UserRepository repository;
+  @Autowired
+  private UserRepository repository;
 
   @Bean
   public UserDetailsService userDetailsService() {
